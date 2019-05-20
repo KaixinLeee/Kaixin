@@ -1,17 +1,22 @@
-/**
- * Separate Blur Shader
- * 
- * This blur shader works by applying two successive passes, one horizontal
- * and the other vertical.
- * 
- * Press the mouse to switch between the custom and default shader.
- */
+
+import processing.serial.*;
 
 PShader blur;
 PGraphics src;
 PGraphics pass1, pass2;
+Serial arduino;
+int targetDistance;
+int currentDistance;
+PImage img;
+PImage img2;
 
 void setup() {
+
+  img = loadImage("moon.jpg"); // Load the original image
+  img2 = loadImage("moon2.jpg"); // Load the original image
+  arduino=new Serial(this, Serial.list()[0], 115200);
+  fill(60);
+
   size(640, 360, P2D);
 
   blur = loadShader("blur.glsl");
@@ -28,12 +33,48 @@ void setup() {
 }
 
 void draw() {
-  blur.set("sigma", 10.*float (mouseX)/float(width));
+
+  background(50);
+  if (arduino.available()>0)
+  { 
+    targetDistance=arduino.read();
+
+    println(arduino.read());
+  }
+  if (currentDistance>targetDistance)
+  {
+    currentDistance--;
+  } else if (currentDistance<targetDistance)
+  {
+    currentDistance++;
+  }
+  //println('a');
+  //println(currentDistance);
+  if (currentDistance < 20)
+  {
+    image(img, 0, 0);
+  }
+  if (currentDistance > 20&&currentDistance <50)
+  {
+    image(img2, 0, 0);
+  }
+
+  //change image regarding to distance
+
+
+
+  blur.set("sigma", 10.*float (currentDistance)/float(width));
+  //ellipse(width/2, height/2, currentDistance*5, currentDistance*5);//
+
+  //blur.set("sigma", 10.*float (mouseX)/float(width));
   src.beginDraw();
   src.background(0);
   src.fill(255);
-  src.ellipse(width/2, height/2, 100, 100);
+  src.ellipse(width/2, height/2, 400, 400);
+  //image(img, 0, 0); // Displays the image from point (0,0) 
   src.endDraw();
+
+
 
   // Applying the blur shader along the vertical direction   
   blur.set("horizontalPass", 0);
