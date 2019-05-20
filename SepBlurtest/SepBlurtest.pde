@@ -10,7 +10,7 @@
 PShader blur;
 PGraphics src;
 PGraphics pass1, pass2;
-
+PImage img;
 void setup() {
   size(640, 360, P2D);
 
@@ -18,9 +18,11 @@ void setup() {
   blur.set("blurSize", 9);
   blur.set("sigma", 5.0f);  
 
+  img = loadImage("moon.jpg"); // Load the original image
+
   src = createGraphics(width, height, P2D); 
 
-  pass1 = createGraphics(width, height, P2D);
+  pass1 = createGraphics(width, height, P2D); 
   pass1.noSmooth();  
 
   pass2 = createGraphics(width, height, P2D);
@@ -31,8 +33,9 @@ void draw() {
   blur.set("sigma", 10.*float (mouseX)/float(width));
   src.beginDraw();
   src.background(0);
-  src.fill(255);
-  src.ellipse(width/2, height/2, 100, 100);
+  src.fill(90);
+  image(img, 0, 0); // Displays the image from point (0,0) 
+  //src.ellipse(width/2, height/2, 100, 100);
   src.endDraw();
 
   // Applying the blur shader along the vertical direction   
