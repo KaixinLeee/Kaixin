@@ -2,15 +2,17 @@
 
 **by Kaixin Li (2019)**
 
+***
+
 ## Contents
 
 - [What is this about?](#what-is-this-about)
-  - [Process](#process)
+	- [What do you need?](#what-do-you-need)
+	- [Process](#process)
 - [Sketches](#sketches)
-  - [UltrasoundTest](#ultrasoundtest)
-  - [VariableBlurTest](#variableblurtest)
-  - [LoadingImages](#loadingimages)
-  - [BlurImage](#blurimage)
+	- [UltrasoundTest](#ultrasoundtest)
+	- [VariableBlurTest](#variableblurtest)
+	- [LoadingImages](#loadingimages)
 
 ---
 
@@ -50,7 +52,3 @@ A Processing sketch to test a blur effect that is can be varied by changing a pa
 ### LoadingImages
 
 A Processing sketch demonstrating the process to load images for debugging.
-
-### BlurImage
-
-A Processing sketch which applies a variable blur filter to an image.
