@@ -1,4 +1,4 @@
-# Project Name
+# Ways of Seeing
 
 **by Kaixin Li (2019)**
 
