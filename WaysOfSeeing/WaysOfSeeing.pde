@@ -7,8 +7,8 @@ PShader blur;
 PGraphics src;
 PGraphics pass1, pass2;
 Serial arduino;
-int targetDistance = 255;
-int currentDistance = 0;
+int targetDistance ;
+int currentDistance ;
 PImage bigImage, mediumImage, smallImage, currentImage;
 
 //-----------------------------------------------------
@@ -23,8 +23,8 @@ void setup()
   arduino = new Serial(this, Serial.list()[0], 115200);
   fill(60);
   //---------------------------------------------------
-  //size(400, 500, P2D);
-  fullScreen(P2D, 2);
+  size(400, 500, P2D);
+  //fullScreen(P2D, 1);
   //---------------------------------------------------
   blur = loadShader("blur.glsl");
   blur.set("blurSize", 60);
@@ -104,16 +104,16 @@ void checkArduino()
 
   println(currentDistance);
   //---------------------------------------------------
-  if (currentDistance < 20)
+  if (currentDistance <90)
   {
     currentImage = bigImage;
   }
-  if (currentDistance > 20 &&
-    currentDistance < 50)
+  if (currentDistance > 90 &&
+    currentDistance < 180)
   {
     currentImage = mediumImage;
   }
-  if (currentDistance > 50)
+  if (currentDistance > 180)
   {
     currentImage = smallImage;
   }
