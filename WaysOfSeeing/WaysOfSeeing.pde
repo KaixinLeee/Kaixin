@@ -23,8 +23,8 @@ void setup()
   arduino = new Serial(this, Serial.list()[0], 115200);
   fill(60);
   //---------------------------------------------------
-  size(1920, 1080, P2D);
-  //fullScreen(P2D, 1);
+  //size(1920, 1080, P2D);
+  fullScreen(P2D, 1);
   //---------------------------------------------------
   blur = loadShader("blur.glsl");
   blur.set("blurSize", 60);
@@ -41,7 +41,7 @@ void setup()
   checkArduino();
 }
 
-float blurScale = 2 * PI / 255.0;
+float blurScale = 1.5 * PI / 100.0;
 
 void draw() 
 {
@@ -53,7 +53,7 @@ void draw()
   //---------------------------------------------------
   src.beginDraw();
   src.background(50);  
-  src.image(currentImage, 0, 0); // Displays the image from point (0,0) 
+  src.image(currentImage, 0, 0); // Displays the image from point (0,0)   
   src.endDraw();
   //---------------------------------------------------
   checkArduino();
@@ -104,18 +104,18 @@ void checkArduino()
 
   println(currentDistance);
   //---------------------------------------------------
-  if (currentDistance <90)
+  if (currentDistance <50)
   {
-    currentImage = bigImage;
+    currentImage = smallImage;
   }
-  if (currentDistance > 90 &&
-    currentDistance < 180)
+  if (currentDistance > 50 &&
+    currentDistance < 100)
   {
     currentImage = mediumImage;
   }
-  if (currentDistance > 180)
+  if (currentDistance > 100)
   {
-    currentImage = smallImage;
+    currentImage = bigImage;
   }
   //---------------------------------------------------
 }
